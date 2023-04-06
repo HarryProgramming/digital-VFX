@@ -242,7 +242,8 @@ def show_false_color(images, gb, gg, gr, ln_t):
     plt.imshow(img_gray, cmap=cmap)
     plt.colorbar()
     plt.axis('off')
-    plt.savefig('false-color.png')
+    plt.savefig('false_color_radiance_map.png')
+    cv.imwrite('recovered_hdr_image.hdr', hdr)
     
 
     return hdr
@@ -264,7 +265,7 @@ def tone_mapping(hdr_image):
 
 
 if __name__ == '__main__':
-    folder = "testing_image" # for now
+    folder = "original_pictures" # for now
     images = load_images(folder)
     #images = np.array(images)
     aligned_images = np.array(mtb_align_images(images))
@@ -295,7 +296,7 @@ if __name__ == '__main__':
     plt.plot(gB, range(256), 'bx')
     plt.ylabel('pixel value Z')
     plt.xlabel('log exposure X')
-    plt.savefig('curve.png')
+    plt.savefig('response_curve.png')
 
     
     hdr= show_false_color(images, gB, gG, gR, exposure_times)
